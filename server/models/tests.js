@@ -37,6 +37,8 @@ const subjectschema=new mongoose.Schema({
 })
 const testSchema=new mongoose.Schema({
     subjects: [subjectschema],
+    duration:{type:String,req:true},
+    testname:{type:String ,req:true},
         
         createdBy: { type: mongoose.Schema.Types.ObjectId, ref: USER, req: true },
         createdAt: { type: Date, default: Date.now },  

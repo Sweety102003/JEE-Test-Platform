@@ -1,17 +1,29 @@
 import React from "react";
-
+import {Link} from "react-router-dom"
+import "./navbar.css"
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <div className="container nav">
-        <a href="/" className="logo">JEE/NEET Platform</a>
-        <ul className="nav-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#tests">Upcoming Tests</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
+    <div className="navbar">
+      
+      
+        <div className="logo">
+        <h2>JEE Test Platform</h2>
+        </div>
+        <ul className="navbar-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/tests">Tests</Link></li>
+        <li><Link to="/performance">Performance</Link></li>
+        <li><Link to="/contact">Contact Us</Link></li>
+      </ul>
+      <div className="navbar-user">
+        <button className="user-button">Profile ▼</button>
+        <div className="dropdown-menu">
+          <Link to="/profile">My Profile</Link>
+          <Link to="/settings">Settings</Link>
+          <Link to="/logout">Logout</Link>
+        </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

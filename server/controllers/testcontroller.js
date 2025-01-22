@@ -1,9 +1,11 @@
 const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
-const  { subjects,createdBy} =req.body;
+const  { subjects,duration ,testname ,createdBy} =req.body;
 const newTest = new Test({
     subjects,
+    duration,
+    testname,
      createdBy  ,});
     await newTest.save();
 

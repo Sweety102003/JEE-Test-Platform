@@ -1,0 +1,64 @@
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 400px;
+  /* position: relative; */
+  
+}
+body{
+  margin:0px;
+}
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 12px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.sidebar{
+  height:100vh;
+  padding:15px;
+  margin-right: 18px;
+  margin-top: 0px;
+  margin-left: 0px;
+  width :15vw;
+  display:flex;
+  flex-direction: column;
+  background-color: rgb(43, 43, 221);
+}
+.contained {
+  display:flex;
+  flex-direction: row;
+  width:100vw;
+  height: 100vh;
+}
+.question-section{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 80vw;
+  /* border:2px solid black; */
+}
+.question-section h1{
+  text-align: left;
+  font-size: 5em;
+    font-weight: bolder;
+    color: blue;
+}
+.right{
+  margin-right: 0px;
+}
+.btn{
+  cursor:pointer;
+  background-color:blue;
+  color:white;
+  font-size: larger;
+  margin-right: 45px;
+  margin-top: 30px;
+  font-size: 3 rem;
+  padding: 8px;
+}
