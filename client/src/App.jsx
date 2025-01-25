@@ -7,6 +7,9 @@ import Home from './components/Home';
 import Tests from './components/Tests';
 import Testdisplaypage from './components/Testdisplaypage';
 import Navbar from './components/Navbar';
+import Profile from './components/Profile';
+import Result from './components/Result';
+
 
 function App() {
 
@@ -21,10 +24,10 @@ function App() {
       <Route path="/tests" element={<Tests/>} />
       <Route path="/register" element={<Registration />} />
       <Route path="/test/:id" element={<Testdisplaypage />} />
+      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/results/:id" element={<Result/>}/>
       </Routes>
-      
-    
-    
+  
   
     </div>
   )

@@ -4,6 +4,7 @@ const jwt=require("jsonwebtoken");
 const bcrypt=require("bcrypt");
 
 const JWT_SECRET=require("../keys2");
+const requirelogin = require("../middleware/requirelogin");
 
 
 const registeruser=async(req, res)=>{
@@ -73,5 +74,9 @@ if(match){
 })
 
 
+};
+const userinfo=async(req ,res)=>{
+const user=req.user;
+return res.json(user);
 }
-module.exports=[registeruser,getuser];
+module.exports=[registeruser,getuser,userinfo];

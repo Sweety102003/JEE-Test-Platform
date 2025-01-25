@@ -1,7 +1,11 @@
 const express =require("express");
 const [ createtest ,getalltests,gettestbyid ] = require("../controllers/testcontroller");
+const [calculateresult,getresult] = require("../controllers/resultcalculation");
+const requirelogin = require("../middleware/requirelogin");
 const router=express.Router();
 router.post("/create" ,createtest);
 router.get("/tests" , getalltests);
 router.get("/test/:id" ,gettestbyid);
+router.post("/submittest" ,calculateresult);
+router.get("/results/:id" ,requirelogin,getresult);
 module.exports=router;

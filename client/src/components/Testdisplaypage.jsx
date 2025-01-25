@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import "./display.css";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 function Testdisplaypage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [test, setTest] = useState();
   const [currentSubjectIndex, setCurrentSubjectIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -15,6 +16,8 @@ function Testdisplaypage() {
   const [showDropdown, setShowDropdown] = useState([]);
   const [questionStatus, setQuestionStatus] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [timer, setTimer] = useState(0); 
+  const [timerRunning, setTimerRunning] = useState(false); 
 
   useEffect(() => {
     getdata();
@@ -26,6 +29,9 @@ function Testdisplaypage() {
       setTest(response.data);
       setSubjects(response.data.subjects);
       setTestname(response.data.testname);
+
+      
+      setTimer(response.data.duration * 60); 
 
       if (response.data.subjects && response.data.subjects.length > 0) {
         const initialStatuses = response.data.subjects.map((subject) =>
@@ -39,11 +45,28 @@ function Testdisplaypage() {
         setQuestionStatus(initialStatuses);
         setSelectedAnswers(initialAnswers);
         setShowDropdown(Array(response.data.subjects.length).fill(false));
+
+        setTimerRunning(true);
       }
     } catch (error) {
       console.error("Error fetching test data:", error);
     }
   };
+
+  useEffect(() => {
+    if (timer > 0 && timerRunning) {
+      const timerInterval = setInterval(() => {
+        setTimer((prevTimer) => {
+          if (prevTimer <= 1) {
+            clearInterval(timerInterval);
+            handleSubmit(); 
+          }
+          return prevTimer - 1;
+        });
+      }, 1000);
+      return () => clearInterval(timerInterval); 
+    }
+  }, [timer, timerRunning]);
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
@@ -90,14 +113,44 @@ function Testdisplaypage() {
     updateQuestionStatus(currentSubjectIndex, questionIndex, "marked-for-review");
   };
 
-  const handleSubmit = () => {
-    const payload = {
-      testId: id,
-      answers: selectedAnswers,
-      statuses: questionStatus,
-    };
-    console.log("Submission Payload:", payload);
-    // Send the payload to your backend
+  const handleSubmit = async () => {
+    setTimerRunning(false); 
+
+    try {
+      const answersPayload = [];
+      subjects.forEach((subject, subjectIndex) => {
+        subject.questions.forEach((question, questionIndex) => {
+          answersPayload.push({
+            questionId: question._id,
+            answer: selectedAnswers[subjectIndex][questionIndex],
+          });
+        });
+      });
+
+      const token = localStorage.getItem("token");
+      const payload = {
+        userid: token,
+        answers: answersPayload,
+        testid: id,
+      };
+
+      const response = await axios.post("http://localhost:5000/submittest", payload);
+      console.log("Submission Response:", response.data);
+
+      // alert(`Test submitted successfully! Your Score: ${response.data.score}`);
+      
+      
+      navigate(`/results/${id}`); 
+    } catch (error) {
+      console.error("Error submitting test:", error);
+      alert("Error submitting the test. Please try again.");
+    }
+  };
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
   return (
@@ -107,26 +160,19 @@ function Testdisplaypage() {
           <div className="subject-container" key={index}>
             <div className="subject-header">
               <button
-                className={`subject-button ${
-                  index === currentSubjectIndex ? "active" : ""
-                }`}
+                className={`subject-button ${index === currentSubjectIndex ? "active" : ""}`}
                 onClick={() => handleSubjectChange(index)}
               >
                 {subject.subjectname}
               </button>
-              <IoIosArrowDropdownCircle
-                className="dropdown-icon"
-                onClick={() => toggleDropdown(index)}
-              />
+              <IoIosArrowDropdownCircle className="dropdown-icon" onClick={() => toggleDropdown(index)} />
             </div>
             {showDropdown[index] && (
               <div className="question-dropdown">
                 {subjects[index].questions.map((_, qIndex) => (
                   <div
                     key={qIndex}
-                    className={`question-item ${
-                      questionStatus[index][qIndex] || "not-attempted"
-                    }`}
+                    className={`question-item ${questionStatus[index][qIndex] || "not-attempted"}`}
                     onClick={() => {
                       setCurrentQuestionIndex(qIndex);
                       if (index !== currentSubjectIndex) {
@@ -144,27 +190,30 @@ function Testdisplaypage() {
       </div>
 
       <div className="question-section">
-      <div className="submit-container">
-        <button className="btn" onClick={handleSubmit}>
-          Submit
-        </button>
-      </div>
-        <h1 style={{display:"inline-block"}}>{testname}</h1>
-      
+        <div className="submit-container">
+          <button className="btn" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
+        <h1 style={{ display: "inline-block" }}>{testname}</h1>
+
+        <div className="timer">
+          Time Remaining: {formatTime(timer)} {/* Display the formatted timer */}
+        </div>
+
         {questions.length > 0 && (
           <>
             <p style={{ fontSize: "2rem" }}>
               Ques: {questions[currentQuestionIndex]?.questionText}
             </p>
-           
+
             {questions[currentQuestionIndex]?.options.map((option, oIndex) => (
               <div key={oIndex} style={{ fontSize: "2rem" }}>
                 <input
                   type="radio"
                   name={`option-${currentQuestionIndex}`}
                   checked={
-                    selectedAnswers[currentSubjectIndex][currentQuestionIndex] ===
-                    oIndex
+                    selectedAnswers[currentSubjectIndex][currentQuestionIndex] === oIndex
                   }
                   onChange={() =>
                     handleAnswerSelection(currentQuestionIndex, oIndex)
@@ -201,9 +250,7 @@ function Testdisplaypage() {
             </div>
           </>
         )}
-        
       </div>
-      
     </div>
   );
 }
