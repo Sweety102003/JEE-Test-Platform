@@ -1,0 +1,154 @@
+
+.items {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    justify-content: center; /* Center all items horizontally */
+    gap: 20px; /* Space between items */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Wrap items to a new row if the screen is too small */
+  }
+  
+  .items div {
+    display: flex;
+    flex-direction: row; /* Align image and text in a row */
+    align-items: center; /* Center image and text vertically */
+    width: 350px; /* Fixed width for each item */
+    height: 150px; /* Fixed height for each item */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    gap: 15px; /* Space between image and text */
+  }
+  
+  .items div img {
+    width: 100px; /* Fixed width for images */
+    height: 100px; /* Fixed height for images */
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+    border-radius: 10px; /* Optional rounded corners */
+  }
+  
+  .items div h2 {
+    font-size: 18px;
+    margin: 0;
+    color: #2c3e50;
+    text-align: left; /* Align text to the left */
+    flex: 1; /* Take up remaining space in the row */
+  }
+  @media (max-width: 768px) {
+    .items div {
+      flex-direction: column; /* Stack image and text vertically */
+      height: auto; /* Adjust height dynamically */
+    }
+  
+    .items div img {
+      width: 80px; /* Smaller image size for mobile */
+      height: 80px;
+    }
+  
+    .items div h2 {
+      font-size: 16px; /* Slightly smaller text */
+      text-align: center;
+    }
+  }
+  .component {
+    display: flex; /* Set flex container */
+    flex-direction: row; /* Arrange content in a row (text left, image right) */
+    justify-content: space-between; /* Space out the text and image */
+    align-items: center; /* Center content vertically */
+    gap: 20px; /* Add spacing between text and image */
+    padding: 20px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    background-color: #cdd3d8;
+  }
+  
+  .component > div:first-child {
+    flex: 1; /* Text and button take equal space */
+    min-width: 300px; /* Minimum width for responsiveness */
+  }
+  
+  .component > div:last-child {
+    flex: 1; /* Image container takes equal space */
+    min-width: 300px; /* Minimum width for responsiveness */
+    display: flex;
+    justify-content: flex-end; /* Align image to the right */
+  }
+  
+  .component h1 {
+    font-size: 4rem;
+    color: #2c3e50;
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+  
+  .component h2 {
+    text-align: left;
+    font-size: 3rem;
+    margin-top: 0px;
+    color: #2c3e50;
+  }
+  
+  .component p {
+    font-size: 23px;
+  }
+  
+  .btn5 {
+    position: relative;
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn5:hover {
+    background-color: #1a252f; /* Darker shade on hover */
+  }
+  
+  #imge {
+    width: 100%; /* Image scales within its container */
+    max-width: 500px; /* Limit the maximum width of the image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional rounded corners */
+  }
+  
+  @media (max-width: 768px) {
+    .component {
+      flex-direction: column; /* Stack content vertically on smaller screens */
+      align-items: center; /* Center-align content */
+    }
+  
+    .component h1 {
+      font-size: 2rem; /* Reduce font size for smaller screens */
+      text-align: center;
+    }
+  
+    .component h2 {
+      font-size: 1.5rem; /* Adjust font size */
+      text-align: center;
+    }
+  
+    .component p {
+      text-align: center;
+    }
+  
+    .component > div:last-child {
+      justify-content: center; /* Center image on smaller screens */
+    }
+  
+    #imge {
+      max-width: 90%; /* Scale image width on smaller screens */
+    }
+  
+    .btn5 {
+      font-size: 1.5rem; /* Adjust button size */
+      padding: 8px 16px;
+      position: relative;
+      top:50%;
+      left:50%;
+    }
+  }
+  

@@ -27,7 +27,7 @@ function Tests() {
   return (
     <div className='contain'> 
 
-<h1> Available Tests </h1>
+<h1 style={{textAlign:'center'}}> Available Tests </h1>
 {tests.length===0?(<p>
 No tests available .Please check after some time.
 </p>):(
@@ -35,7 +35,7 @@ No tests available .Please check after some time.
   {tests.map((test)=>(
     <div key={test._id} className='card'>
 
-  <h2 style={{color:"blue" , fontSize:"3rem"}}>
+  <h2 style={{color:" #333" , fontSize:"3rem"}}>
     {test.testname}
   </h2>
   <div className='card2'>
@@ -44,7 +44,7 @@ No tests available .Please check after some time.
   </div>
   <div className="info" style={{fontWeight:"bold" ,fontSize:"24 px" ,padding:"0px"}}>
     <p> Questions: 90    </p><p> Duration: {test.duration} min</p></div></div>
-    <button className="btn" style={{ width:"100%" ,fontSize:"2rem" ,fontWeight:"bold"}} 
+    <button className="btn" style={{ width:"80%" , marginBottom:"8px" ,position:"relative" , bottom:"0px" ,fontSize:"2rem" ,fontWeight:"bold"}} 
     onClick={()=>{
       navigate(`/test/${test._id}`);
     }}>
