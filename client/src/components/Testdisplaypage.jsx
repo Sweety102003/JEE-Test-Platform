@@ -17,7 +17,8 @@ function Testdisplaypage() {
   const [questionStatus, setQuestionStatus] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [timer, setTimer] = useState(0); 
-  const [timerRunning, setTimerRunning] = useState(false); 
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [questionStartTimes, setQuestionStartTimes] = useState([]);  // New state to track start times for each question
 
   useEffect(() => {
     getdata();
@@ -30,7 +31,6 @@ function Testdisplaypage() {
       setSubjects(response.data.subjects);
       setTestname(response.data.testname);
 
-      
       setTimer(response.data.duration * 60); 
 
       if (response.data.subjects && response.data.subjects.length > 0) {
@@ -45,6 +45,10 @@ function Testdisplaypage() {
         setQuestionStatus(initialStatuses);
         setSelectedAnswers(initialAnswers);
         setShowDropdown(Array(response.data.subjects.length).fill(false));
+
+        // Initialize questionStartTimes to track start times of each question
+        const initialStartTimes = response.data.subjects[0].questions.map(() => 0);
+        setQuestionStartTimes(initialStartTimes);
 
         setTimerRunning(true);
       }
@@ -67,6 +71,15 @@ function Testdisplaypage() {
       return () => clearInterval(timerInterval); 
     }
   }, [timer, timerRunning]);
+
+  // Handle the start time of each question
+  useEffect(() => {
+    setQuestionStartTimes((prev) => {
+      const newStartTimes = [...prev];
+      newStartTimes[currentQuestionIndex] = Date.now();  // Set the start time for the current question
+      return newStartTimes;
+    });
+  }, [currentQuestionIndex]);
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
@@ -118,11 +131,22 @@ function Testdisplaypage() {
 
     try {
       const answersPayload = [];
+      const timeTakenPerQuestion = [];
+
       subjects.forEach((subject, subjectIndex) => {
         subject.questions.forEach((question, questionIndex) => {
+          const timeSpent = questionStartTimes[questionIndex]
+            ? Date.now() - questionStartTimes[questionIndex]
+            : 0;
+
           answersPayload.push({
             questionId: question._id,
             answer: selectedAnswers[subjectIndex][questionIndex],
+          });
+
+          timeTakenPerQuestion.push({
+            questionId: question._id,
+            timeSpent,
           });
         });
       });
@@ -132,15 +156,14 @@ function Testdisplaypage() {
         userid: token,
         answers: answersPayload,
         testid: id,
+        timeTaken: timeTakenPerQuestion,  // Send the time data
       };
 
       const response = await axios.post("http://localhost:5000/submittest", payload);
       console.log("Submission Response:", response.data);
+      const subjectScores = response.data.subjectScores;
 
-      // alert(`Test submitted successfully! Your Score: ${response.data.score}`);
-      
-      
-      navigate(`/results/${id}`); 
+      navigate(`/results/${id}`, { state: { subjectScores } }); 
     } catch (error) {
       console.error("Error submitting test:", error);
       alert("Error submitting the test. Please try again.");
@@ -212,12 +235,8 @@ function Testdisplaypage() {
                 <input
                   type="radio"
                   name={`option-${currentQuestionIndex}`}
-                  checked={
-                    selectedAnswers[currentSubjectIndex][currentQuestionIndex] === oIndex
-                  }
-                  onChange={() =>
-                    handleAnswerSelection(currentQuestionIndex, oIndex)
-                  }
+                  checked={selectedAnswers[currentSubjectIndex][currentQuestionIndex] === oIndex}
+                  onChange={() => handleAnswerSelection(currentQuestionIndex, oIndex)}
                 />
                 {option.optionText}
               </div>
@@ -252,7 +271,6 @@ function Testdisplaypage() {
         )}
       </div>
     </div>
-  );
-}
-
-export default Testdisplaypage;
+ 
+      );};
+      export default Testdisplaypage;

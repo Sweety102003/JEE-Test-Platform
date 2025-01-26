@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from "axios";
+import Chartsforresult from './Chartsforresult';
+import Piechartshowingresult from './Piechartshowingresult';
 
 function Result() {
+    const location = useLocation();
+  const { subjectScores, score } = location.state || {};
+
     const [data,setdata]=useState();
     const {id}=useParams();
     const token=localStorage.getItem('token');
@@ -25,6 +30,14 @@ function Result() {
         <p >You have successfully attempted the test</p>
         <p style={{fontWeight:"bold" ,fontSize:"1.5rem"}}>
              Your Score:{data.score} </p>
+          {subjectScores&&<> <div className="charts-container">
+      <div className="chart-section">
+        <Chartsforresult subjectScores={subjectScores} /> 
+      </div>
+      <div className="chart-section">
+        <Piechartshowingresult subjectScores={subjectScores} />
+      </div>
+    </div></>}  
             </>}
     </div>
   )

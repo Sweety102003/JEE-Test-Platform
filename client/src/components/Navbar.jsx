@@ -7,7 +7,7 @@ const Navbar = () => {
       
       
         <div className="logo">
-        <h2>JEE Test Platform</h2>
+        <h2 style={{color:"white"}}>JEE Test Platform</h2>
         </div>
         <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>
