@@ -1,3 +1,4 @@
+const Attempt = require("../models/attempttest");
 const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
@@ -25,4 +26,11 @@ if (!test) {
 }
 return res.status(200).json(test);
 };
-module.exports=[createtest ,getalltests,gettestbyid ];
+const attemptedtest=async(req,res)=>{
+const id=req.user._id;
+const attempt=await Attempt.find({user:id}).populate("test");
+console.log(attempt);
+
+return res.json(attempt);
+};
+module.exports=[createtest ,getalltests,gettestbyid ,attemptedtest ];

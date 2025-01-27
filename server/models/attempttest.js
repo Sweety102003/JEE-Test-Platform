@@ -10,6 +10,20 @@ const attemptSchema=new mongoose.Schema({
         score: { type: Number, default: 0 },
         testDuration:{type: Number,default:0},
         completedAt: { type: Date, default: Date.now },
+        subjectScores: [
+          {
+            subjectName: { type: String, required: true },
+            score: { type: Number, default: 0 },
+            totalQuestions: { type: Number, default: 0 },
+          },
+        ],
+        performanceData: [
+          {
+            questionId: { type: mongoose.Schema.Types.ObjectId, required: true },
+            timeTaken: { type: Number, default: 0 }, 
+            correct: { type: Boolean, default: false },
+          },
+        ],
       });
       const Attempt = mongoose.model("Attempt", attemptSchema);
       module.exports=Attempt;

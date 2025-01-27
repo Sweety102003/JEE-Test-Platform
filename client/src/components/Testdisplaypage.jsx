@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; 
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./display.css";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
@@ -16,9 +16,10 @@ function Testdisplaypage() {
   const [showDropdown, setShowDropdown] = useState([]);
   const [questionStatus, setQuestionStatus] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
-  const [timer, setTimer] = useState(0); 
+  const [timer, setTimer] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
-  const [questionStartTimes, setQuestionStartTimes] = useState([]);  // New state to track start times for each question
+  const [questionStartTimes, setQuestionStartTimes] = useState([]);
+  const [timeSpentOnQuestions, setTimeSpentOnQuestions] = useState([]);
 
   useEffect(() => {
     getdata();
@@ -31,7 +32,7 @@ function Testdisplaypage() {
       setSubjects(response.data.subjects);
       setTestname(response.data.testname);
 
-      setTimer(response.data.duration * 60); 
+      setTimer(response.data.duration * 60);
 
       if (response.data.subjects && response.data.subjects.length > 0) {
         const initialStatuses = response.data.subjects.map((subject) =>
@@ -46,9 +47,13 @@ function Testdisplaypage() {
         setSelectedAnswers(initialAnswers);
         setShowDropdown(Array(response.data.subjects.length).fill(false));
 
-        // Initialize questionStartTimes to track start times of each question
-        const initialStartTimes = response.data.subjects[0].questions.map(() => 0);
+        const initialStartTimes = response.data.subjects[0].questions.map(() => Date.now());
         setQuestionStartTimes(initialStartTimes);
+
+        const initialTimeSpent = response.data.subjects.map((subject) =>
+          Array(subject.questions.length).fill(0)
+        );
+        setTimeSpentOnQuestions(initialTimeSpent);
 
         setTimerRunning(true);
       }
@@ -63,23 +68,34 @@ function Testdisplaypage() {
         setTimer((prevTimer) => {
           if (prevTimer <= 1) {
             clearInterval(timerInterval);
-            handleSubmit(); 
+            handleSubmit();
           }
           return prevTimer - 1;
         });
       }, 1000);
-      return () => clearInterval(timerInterval); 
+      return () => clearInterval(timerInterval);
     }
   }, [timer, timerRunning]);
 
-  // Handle the start time of each question
   useEffect(() => {
-    setQuestionStartTimes((prev) => {
-      const newStartTimes = [...prev];
-      newStartTimes[currentQuestionIndex] = Date.now();  // Set the start time for the current question
-      return newStartTimes;
-    });
-  }, [currentQuestionIndex]);
+    if (questions.length > 0) {
+      const timeNow = Date.now();
+      const previousQuestionTime =
+        timeNow - questionStartTimes[currentQuestionIndex];
+
+      setTimeSpentOnQuestions((prev) => {
+        const updated = [...prev];
+        updated[currentSubjectIndex][currentQuestionIndex] += previousQuestionTime;
+        return updated;
+      });
+
+      setQuestionStartTimes((prev) => {
+        const updatedStartTimes = [...prev];
+        updatedStartTimes[currentQuestionIndex] = timeNow;
+        return updatedStartTimes;
+      });
+    }
+  }, [currentQuestionIndex, currentSubjectIndex]);
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
@@ -127,7 +143,7 @@ function Testdisplaypage() {
   };
 
   const handleSubmit = async () => {
-    setTimerRunning(false); 
+    setTimerRunning(false);
 
     try {
       const answersPayload = [];
@@ -135,10 +151,6 @@ function Testdisplaypage() {
 
       subjects.forEach((subject, subjectIndex) => {
         subject.questions.forEach((question, questionIndex) => {
-          const timeSpent = questionStartTimes[questionIndex]
-            ? Date.now() - questionStartTimes[questionIndex]
-            : 0;
-
           answersPayload.push({
             questionId: question._id,
             answer: selectedAnswers[subjectIndex][questionIndex],
@@ -146,24 +158,25 @@ function Testdisplaypage() {
 
           timeTakenPerQuestion.push({
             questionId: question._id,
-            timeSpent,
+            timeSpent: timeSpentOnQuestions[subjectIndex][questionIndex],
           });
         });
       });
-
+console.log(timeTakenPerQuestion);
       const token = localStorage.getItem("token");
       const payload = {
         userid: token,
         answers: answersPayload,
         testid: id,
-        timeTaken: timeTakenPerQuestion,  // Send the time data
+        timeTaken: timeTakenPerQuestion,
       };
+      console.log(payload);
 
       const response = await axios.post("http://localhost:5000/submittest", payload);
       console.log("Submission Response:", response.data);
       const subjectScores = response.data.subjectScores;
 
-      navigate(`/results/${id}`, { state: { subjectScores } }); 
+      navigate(`/results/${id}`, { state: { subjectScores } });
     } catch (error) {
       console.error("Error submitting test:", error);
       alert("Error submitting the test. Please try again.");
@@ -188,7 +201,10 @@ function Testdisplaypage() {
               >
                 {subject.subjectname}
               </button>
-              <IoIosArrowDropdownCircle className="dropdown-icon" onClick={() => toggleDropdown(index)} />
+              <IoIosArrowDropdownCircle
+                className="dropdown-icon"
+                onClick={() => toggleDropdown(index)}
+              />
             </div>
             {showDropdown[index] && (
               <div className="question-dropdown">
@@ -220,9 +236,7 @@ function Testdisplaypage() {
         </div>
         <h1 style={{ display: "inline-block" }}>{testname}</h1>
 
-        <div className="timer">
-          Time Remaining: {formatTime(timer)} {/* Display the formatted timer */}
-        </div>
+        <div className="timer">Time Remaining: {formatTime(timer)}</div>
 
         {questions.length > 0 && (
           <>
@@ -235,7 +249,9 @@ function Testdisplaypage() {
                 <input
                   type="radio"
                   name={`option-${currentQuestionIndex}`}
-                  checked={selectedAnswers[currentSubjectIndex][currentQuestionIndex] === oIndex}
+                  checked={
+                    selectedAnswers[currentSubjectIndex][currentQuestionIndex] === oIndex
+                  }
                   onChange={() => handleAnswerSelection(currentQuestionIndex, oIndex)}
                 />
                 {option.optionText}
@@ -271,6 +287,7 @@ function Testdisplaypage() {
         )}
       </div>
     </div>
- 
-      );};
-      export default Testdisplaypage;
+  );
+}
+
+export default Testdisplaypage;
