@@ -1,4 +1,5 @@
 const Attempt = require("../models/attempttest");
+const Bookmark = require("../models/bookmark");
 const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
@@ -33,4 +34,25 @@ console.log(attempt);
 
 return res.json(attempt);
 };
-module.exports=[createtest ,getalltests,gettestbyid ,attemptedtest ];
+const createbookmark=async(req,res)=>{
+const {questionId,bookmarked}=req.body;
+const bookmark=new Bookmark({
+    user:req.user._id,
+    questionId,
+    bookmarked
+})
+await bookmark.save();
+res.status(200).json(bookmark);
+};
+const getbookmarkedques=async(req,res)=>{
+const {id}=req.params;
+const decodedToken = jwt.decode(id);
+
+
+const bookmarks=await Bookmark.find({user:decodedToken._id,
+    bookmarked:true
+});
+const bookmarkedQuestionIds = bookmarks.map((bookmark) => bookmark.questionId);
+res.status(200).json({ bookmarkedQuestions: bookmarkedQuestionIds });
+};
+module.exports=[createtest ,getalltests,gettestbyid ,attemptedtest ,createbookmark ,getbookmarkedques ];

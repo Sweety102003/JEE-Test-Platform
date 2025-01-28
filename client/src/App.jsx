@@ -9,6 +9,7 @@ import Testdisplaypage from './components/Testdisplaypage';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import Result from './components/Result';
+import Performance from './components/Performance';
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
       <Route path="/test/:id" element={<Testdisplaypage />} />
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/results/:id" element={<Result/>}/>
+      <Route path="/performance" element={<Performance />}/>
+      
       </Routes>
   
   

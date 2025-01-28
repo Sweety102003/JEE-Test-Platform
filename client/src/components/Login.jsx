@@ -13,7 +13,9 @@ function Login() {
       password:password
     });
     console.log(response.data);
+
     localStorage.setItem("token" ,response.data);
+    navigate("/");
   }
 
   return (

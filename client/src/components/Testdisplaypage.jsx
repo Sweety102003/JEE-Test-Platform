@@ -134,6 +134,24 @@ function Testdisplaypage() {
   const handleMarkForReview = (questionIndex) => {
     updateQuestionStatus(currentSubjectIndex, questionIndex, "marked-for-review");
   };
+  const token = localStorage.getItem("token");
+  const postbookmark =async()=>{
+   
+    const questionId = questions[currentQuestionIndex]._id;
+    const response= await axios.post("http://localhost:3000/bookmark",{
+   questionId:questionId,
+      bookmarked:true},
+
+      {headers:{
+        Authorization: `Bearer ${token}`,
+        
+      }
+    });
+    
+    if (response.status === 200) {
+      console.log("Question bookmarked successfully:", response.data);}
+
+  }
 
   const handleSubmit = async () => {
     updateTimeSpent();
@@ -157,7 +175,7 @@ function Testdisplaypage() {
         });
       });
 
-      const token = localStorage.getItem("token");
+     
       const payload = {
         userid: token,
         answers: answersPayload,
@@ -257,13 +275,20 @@ function Testdisplaypage() {
             ))}
 
             <div className="navigation-section">
-              <button
+              <div style={{display:"flex" ,justifyContent:"space-between"}}><button
                 className="mark-for-review-btn"
                 onClick={() => handleMarkForReview(currentQuestionIndex)}
               >
                 Mark for Review
               </button>
-
+              <button
+                className="mark-for-review-btn"
+               style={{position:"relative" ,right:"0px"}} 
+               onClick={()=>{postbookmark();}}
+              >
+                Bookmark
+              </button>
+              </div>
               <div className="navigation-buttons">
                 <button
                   className="previous"

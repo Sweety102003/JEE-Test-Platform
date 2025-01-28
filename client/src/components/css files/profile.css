@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: rgb(183, 183, 194);
   }
   
   div {
@@ -42,27 +42,27 @@ body {
   
   .card1 p {
     margin: 5px 0;
-    font-size: 14px;
-    color: #333;
+    font-size: 1.5 rem;
+    color: #2c3e50;
   }
   
   .card1 p:first-child {
     font-weight: bold;
-    font-size: 18px;
-    color: #007BFF;
+    font-size: 24px;
+    color: #2c3e50;
   }
   
   
   .cards-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
     width: 100%;
   }
   
   @media (min-width: 768px) {
     .cards-container {
-      grid-template-columns: 1fr 1fr;
+      flex-direction: row;
     }
   }
   
@@ -72,15 +72,13 @@ body {
     }
   }
   
-  /* Admin badge */
+  
   .admin-badge {
-    display: inline-block;
-    background-color: #28a745;
-    color: white;
+    color: #2c3e50;
     padding: 5px 10px;
     border-radius: 5px;
-    font-size: 12px;
-    margin-left: 10px;
+    font-size: 16px;
+    text-align :left;
   }
   
   
@@ -88,4 +86,13 @@ body {
     font-size: 14px;
     line-height: 1.5;
   }
-  
+  .profile-performa{
+    background-color: white;
+    border:4px solid white;
+   border-radius:5 px ;
+   padding:20px;
+   margin:28px 18px ;
+   color:white;
+   text-align: center;
+   height:120 px;
+  }
