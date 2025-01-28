@@ -5,7 +5,7 @@ import photo2 from "../images/1.jpg"
 import photo3 from "../images/2.jpg"
 import photo4 from "../images/3.svg"
 
-import "./home.css"
+import "./css files/home.css"
 import { useNavigate } from 'react-router-dom'
 import Footer from './Footer'
 import Tests from './Tests'

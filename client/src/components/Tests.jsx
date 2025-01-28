@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import "./Tests.css"
+import "./css files/Tests.css"
 import photo1 from "../images/jee.jpeg"
 import { useNavigate } from 'react-router-dom';
 function Tests() {

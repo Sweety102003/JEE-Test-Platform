@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./display.css";
+import "./css files/display.css";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 function Testdisplaypage() {
@@ -18,7 +18,7 @@ function Testdisplaypage() {
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [timer, setTimer] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
-  const [questionStartTimes, setQuestionStartTimes] = useState([]);
+  const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [timeSpentOnQuestions, setTimeSpentOnQuestions] = useState([]);
 
   useEffect(() => {
@@ -47,9 +47,6 @@ function Testdisplaypage() {
         setSelectedAnswers(initialAnswers);
         setShowDropdown(Array(response.data.subjects.length).fill(false));
 
-        const initialStartTimes = response.data.subjects[0].questions.map(() => Date.now());
-        setQuestionStartTimes(initialStartTimes);
-
         const initialTimeSpent = response.data.subjects.map((subject) =>
           Array(subject.questions.length).fill(0)
         );
@@ -77,39 +74,35 @@ function Testdisplaypage() {
     }
   }, [timer, timerRunning]);
 
-  useEffect(() => {
-    if (questions.length > 0) {
-      const timeNow = Date.now();
-      const previousQuestionTime =
-        timeNow - questionStartTimes[currentQuestionIndex];
+  const updateTimeSpent = () => {
+    const timeNow = Date.now();
+    const timeSpent = timeNow - questionStartTime;
 
-      setTimeSpentOnQuestions((prev) => {
-        const updated = [...prev];
-        updated[currentSubjectIndex][currentQuestionIndex] += previousQuestionTime;
-        return updated;
-      });
+    setTimeSpentOnQuestions((prev) => {
+      const updated = [...prev];
+      updated[currentSubjectIndex][currentQuestionIndex] += timeSpent;
+      return updated;
+    });
 
-      setQuestionStartTimes((prev) => {
-        const updatedStartTimes = [...prev];
-        updatedStartTimes[currentQuestionIndex] = timeNow;
-        return updatedStartTimes;
-      });
-    }
-  }, [currentQuestionIndex, currentSubjectIndex]);
+    setQuestionStartTime(timeNow);
+  };
 
   const handleNextQuestion = () => {
+    updateTimeSpent();
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     }
   };
 
   const handlePreviousQuestion = () => {
+    updateTimeSpent();
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
     }
   };
 
   const handleSubjectChange = (subjectIndex) => {
+    updateTimeSpent();
     setCurrentSubjectIndex(subjectIndex);
     setQuestions(subjects[subjectIndex].questions);
     setCurrentQuestionIndex(0);
@@ -143,6 +136,7 @@ function Testdisplaypage() {
   };
 
   const handleSubmit = async () => {
+    updateTimeSpent();
     setTimerRunning(false);
 
     try {
@@ -162,7 +156,7 @@ function Testdisplaypage() {
           });
         });
       });
-console.log(timeTakenPerQuestion);
+
       const token = localStorage.getItem("token");
       const payload = {
         userid: token,
@@ -170,6 +164,7 @@ console.log(timeTakenPerQuestion);
         testid: id,
         timeTaken: timeTakenPerQuestion,
       };
+
       console.log(payload);
 
       const response = await axios.post("http://localhost:5000/submittest", payload);
@@ -211,8 +206,11 @@ console.log(timeTakenPerQuestion);
                 {subjects[index].questions.map((_, qIndex) => (
                   <div
                     key={qIndex}
-                    className={`question-item ${questionStatus[index][qIndex] || "not-attempted"}`}
+                    className={`question-item ${
+                      questionStatus[index][qIndex] || "not-attempted"
+                    }`}
                     onClick={() => {
+                      updateTimeSpent();
                       setCurrentQuestionIndex(qIndex);
                       if (index !== currentSubjectIndex) {
                         handleSubjectChange(index);

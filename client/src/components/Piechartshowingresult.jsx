@@ -1,5 +1,5 @@
 import React from 'react'
-import "./chart.css"
+import "./css files/chart.css"
 import {
   Chart as ChartJS,
   ArcElement,
