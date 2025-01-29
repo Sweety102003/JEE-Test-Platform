@@ -4,11 +4,14 @@ const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
 const  { subjects,duration ,testname } =req.body;
+console.log(req.body);
+console.log(req.user);
 const newTest = new Test({
     subjects,
     duration,
     testname,
-     createdBy:req.user._id  ,});
+     createdBy:req.user._id ,
+    });
     await newTest.save();
 
 res.status(201).json({ message: "Test created successfully", newTest });

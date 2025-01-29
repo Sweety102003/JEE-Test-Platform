@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom"
 import "./css files/navbar.css"
-const Navbar = () => {
+const Navbar = ({setmodalOpen}) => {
   return (
     <div className="navbar">
       
@@ -17,6 +17,10 @@ const Navbar = () => {
         <li><Link to="/bookmark/:id"> Bookmarks</Link> </li>
         <li> <Link to="/createtests">Add Test</Link></li>
         <li><Link to="/contact">Contact Us</Link></li>
+        
+       <li onClick={()=>
+        setmodalOpen(true)}><Link to={"/"}> 
+       Log Out</Link></li> 
 
         
         <li><Link to="/login">Login </Link></li>

@@ -12,14 +12,19 @@ import Result from './components/Result';
 import Performance from './components/Performance';
 import Bookmark from './components/Bookmark';
 import AddTest from './components/AddTest';
+import Logout from './components/Logout';
+import { useState } from 'react';
+import ContactUs from './components/ContactUs';
 
 
 function App() {
-
+  const [modalOpen,setmodalOpen]=useState(false);
+  
+  
   return (
     <div>
     
-<Navbar />
+<Navbar setmodalOpen={setmodalOpen} />
     
       <Routes>
       <Route path="/" element={<Home />}/>
@@ -32,8 +37,10 @@ function App() {
       <Route path="/performance" element={<Performance />}/>
       <Route path="/bookmark/:id" element={<Bookmark />} />
       <Route path="/createtests" element={<AddTest />}/>
+      <Route path="/contact" element={<ContactUs />} />
       </Routes>
-  
+      
+      {modalOpen && <Logout setmodalOpen={setmodalOpen}/>}
   
     </div>
   )
