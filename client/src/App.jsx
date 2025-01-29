@@ -10,6 +10,8 @@ import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import Result from './components/Result';
 import Performance from './components/Performance';
+import Bookmark from './components/Bookmark';
+import AddTest from './components/AddTest';
 
 
 function App() {
@@ -28,7 +30,8 @@ function App() {
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/results/:id" element={<Result/>}/>
       <Route path="/performance" element={<Performance />}/>
-      
+      <Route path="/bookmark/:id" element={<Bookmark />} />
+      <Route path="/createtests" element={<AddTest />}/>
       </Routes>
   
   

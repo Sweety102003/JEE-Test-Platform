@@ -3,12 +3,12 @@ const [ createtest ,getalltests,gettestbyid ,attemptedtest ,createbookmark ,getb
 const [calculateresult,getresult] = require("../controllers/resultcalculation");
 const requirelogin = require("../middleware/requirelogin");
 const router=express.Router();
-router.post("/create" ,createtest);
+router.post("/create" ,requirelogin ,createtest);
 router.get("/tests" , getalltests);
 router.get("/test/:id" ,gettestbyid);
 router.post("/submittest" ,calculateresult);
 router.get("/results/:id" ,requirelogin,getresult);
 router.get("/attemptedtests",requirelogin ,attemptedtest);
 router.post("/bookmark" ,requirelogin ,createbookmark);
-router.get("/bookmark/:id",getbookmarkedques);
+router.get("/bookmarks",requirelogin ,getbookmarkedques);
 module.exports=router;

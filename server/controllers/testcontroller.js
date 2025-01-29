@@ -3,12 +3,12 @@ const Bookmark = require("../models/bookmark");
 const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
-const  { subjects,duration ,testname ,createdBy} =req.body;
+const  { subjects,duration ,testname } =req.body;
 const newTest = new Test({
     subjects,
     duration,
     testname,
-     createdBy  ,});
+     createdBy:req.user._id  ,});
     await newTest.save();
 
 res.status(201).json({ message: "Test created successfully", newTest });
@@ -45,14 +45,31 @@ await bookmark.save();
 res.status(200).json(bookmark);
 };
 const getbookmarkedques=async(req,res)=>{
-const {id}=req.params;
-const decodedToken = jwt.decode(id);
 
 
-const bookmarks=await Bookmark.find({user:decodedToken._id,
+const bookmarks=await Bookmark.find({user:req.user._id,
     bookmarked:true
 });
 const bookmarkedQuestionIds = bookmarks.map((bookmark) => bookmark.questionId);
-res.status(200).json({ bookmarkedQuestions: bookmarkedQuestionIds });
+const tests=await Test.find();
+let bookmarkedQuestions = [];
+
+        
+        tests.forEach((test) => {
+            test.subjects.forEach((subject) => {
+                subject.questions.forEach((question) => {
+                    if (bookmarkedQuestionIds.includes(question._id.toString())) {
+                        bookmarkedQuestions.push({
+                            questionText: question.questionText,
+                            questionImage: question.questionImage,
+                            options: question.options,
+                            correctAnswer: question.correctAnswer,
+                        });
+                    }
+                });
+            });
+        });
+
+        res.status(200).json({ bookmarkedQuestions });
 };
 module.exports=[createtest ,getalltests,gettestbyid ,attemptedtest ,createbookmark ,getbookmarkedques ];

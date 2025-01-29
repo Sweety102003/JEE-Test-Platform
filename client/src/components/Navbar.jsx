@@ -14,7 +14,10 @@ const Navbar = () => {
         <li><Link to="/tests">Tests</Link></li>
         <li> <Link to ="/profile">Profile</Link></li>
         <li><Link to="/performance">Performance</Link></li>
+        <li><Link to="/bookmark/:id"> Bookmarks</Link> </li>
+        <li> <Link to="/createtests">Add Test</Link></li>
         <li><Link to="/contact">Contact Us</Link></li>
+
         
         <li><Link to="/login">Login </Link></li>
 
