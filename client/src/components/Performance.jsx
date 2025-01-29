@@ -67,13 +67,12 @@ function Performance() {
       <h1 style={{ marginBottom: "20px" }}>Detailed Performance Analysis</h1>
 
 
+     {test.length>0?(<>
       <Chartsforperformances2 testScores={testScores} />
 
     
-      <Chartsforperformances subjectScores={subjectScores} />
-
-    
-      <div style={{ marginTop: "30px", width: "80%" }}>
+<Chartsforperformances subjectScores={subjectScores} />
+<div style={{ marginTop: "30px", width: "80%" }}>
         <h2>Strengths</h2>
         {insights.strengths.length > 0 ? (
           <ul>
@@ -97,6 +96,13 @@ function Performance() {
           <p>No weaknesses identified</p>
         )}
       </div>
+     </>
+
+
+     ):(<div>Please give tests first </div>)} 
+
+    
+      
     </div>
   );
 }

@@ -3,14 +3,13 @@ const Bookmark = require("../models/bookmark");
 const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
-const  { subjects,duration ,testname } =req.body;
+const  { subjects,duration ,testname ,createdBy} =req.body;
 console.log(req.body);
-console.log(req.user);
 const newTest = new Test({
     subjects,
     duration,
     testname,
-     createdBy:req.user._id ,
+     createdBy,
     });
     await newTest.save();
 

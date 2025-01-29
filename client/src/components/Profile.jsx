@@ -36,7 +36,7 @@ function Profile() {
         {/* {user.isAdmin && <span className="admin-badge">Admin</span>} */}
         </div>
         {testinfo&&<p style={{fontSize:"2rem" ,color:"#2c3e50" ,fontWeight:"bold"}}>My tests</p>}
-        {testinfo&&<div className='cards-container'>
+        {testinfo.length>0 ?(<div className='cards-container'>
             
          {testinfo.map((test,index)=>(
             <div key={index} className="card1" >
@@ -55,7 +55,7 @@ function Profile() {
                 
             </div>
         ))}
-        </div>}
+        </div>):(<p>No tests were attempted by you</p>)}
         
         </> }
    

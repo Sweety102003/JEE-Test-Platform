@@ -207,15 +207,15 @@ function Testdisplaypage() {
       <div className="sidebar">
         {subjects.map((subject, index) => (
           <div className="subject-container" key={index}>
-            <div className="subject-header">
+            <div className="subject-header" >
               <button
                 className={`subject-button ${index === currentSubjectIndex ? "active" : ""}`}
-                onClick={() => handleSubjectChange(index)}
+                onClick={() => handleSubjectChange(index)} style={{backgroundColor:"#2c3e50"}}
               >
                 {subject.subjectname}
               </button>
               <IoIosArrowDropdownCircle
-                className="dropdown-icon"
+                className="dropdown-icon" style={{color:"black"}}
                 onClick={() => toggleDropdown(index)}
               />
             </div>
