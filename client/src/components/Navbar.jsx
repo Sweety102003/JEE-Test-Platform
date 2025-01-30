@@ -17,6 +17,7 @@ const Navbar = ({setmodalOpen}) => {
         <li><Link to="/bookmark/:id"> Bookmarks</Link> </li>
         <li> <Link to="/createtests">Add Test</Link></li>
         <li><Link to="/contact">Contact Us</Link></li>
+        <li> <Link to="/upcomingtests">Upcoming tests</Link></li>
         
        <li onClick={()=>
         setmodalOpen(true)}><Link to={"/"}> 

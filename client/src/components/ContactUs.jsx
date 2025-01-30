@@ -18,7 +18,7 @@ const handlesubmit=async()=>{
   console.log(response.data.message);
 }
   return (
-    <div style={{display:"flex",flexDirection:"row" ,justifyContent:"space-evenly"}}>
+    <div className='contactus' style={{display:"flex",flexDirection:"row" ,justifyContent:"space-evenly"}}>
     <div className='form-container'>
       <h2> Contact Us</h2>
         <input type="text" value={name} placeholder='Enter your name' onChange={(e)=>{setname(e.target.value);}} />

@@ -39,8 +39,9 @@ function App() {
       <Route path="/bookmark/:id" element={<Bookmark />} />
       <Route path="/createtests" element={<AddTest />}/>
       <Route path="/contact" element={<ContactUs />} />
+      <Route path="/upcomingtests" element={<Testcalender />}/>
       </Routes>
-      <Testcalender/>
+      
       {modalOpen && <Logout setmodalOpen={setmodalOpen}/>}
   
     </div>
