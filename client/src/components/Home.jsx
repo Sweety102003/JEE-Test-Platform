@@ -54,7 +54,8 @@ function Home() {
 
     </div>
     <Tests />
-    <p style={{backgroundColor:"#cdd3d8" ,fontSize:"2rem" ,textAlign:'center',color:"#2c3e50" }}>© 2025 JEE/NEET Test Platform. All rights reserved.</p>
+   
+    <p style={{backgroundColor:"#cdd3d8" ,fontSize:"2rem" ,textAlign:'center',color:"#2c3e50" }}>© 2025 JEE Test Platform. All rights reserved.</p>
        
     
     </div>

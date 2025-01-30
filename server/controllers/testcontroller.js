@@ -3,13 +3,13 @@ const Bookmark = require("../models/bookmark");
 const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
-const  { subjects,duration ,testname ,createdBy} =req.body;
+const  { subjects,duration ,testname } =req.body;
 console.log(req.body);
 const newTest = new Test({
     subjects,
     duration,
     testname,
-     createdBy,
+     createdBy:req.user._id,
     });
     await newTest.save();
 
@@ -74,4 +74,12 @@ let bookmarkedQuestions = [];
 
         res.status(200).json({ bookmarkedQuestions });
 };
-module.exports=[createtest ,getalltests,gettestbyid ,attemptedtest ,createbookmark ,getbookmarkedques ];
+const getupcomingtests=async(req,res)=>{
+const today =new Date();
+const tests=await Test.find({date:{$gte:today}}).sort({date:1});
+ return res.json( tests);
+
+
+};
+
+module.exports=[createtest ,getalltests,gettestbyid ,attemptedtest ,createbookmark ,getbookmarkedques ,getupcomingtests ];

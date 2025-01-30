@@ -5,6 +5,7 @@ const bcrypt=require("bcrypt");
 
 const JWT_SECRET=require("../keys2");
 const requirelogin = require("../middleware/requirelogin");
+const Message = require("../models/message");
 
 
 const registeruser=async(req, res)=>{
@@ -79,4 +80,15 @@ const userinfo=async(req ,res)=>{
 const user=req.user;
 return res.json(user);
 }
-module.exports=[registeruser,getuser,userinfo];
+const getmessage=async(req,res)=>{
+  const {name ,email,subject,message}=req.body;
+  const usermessage=new Message({
+    name,
+    email,subject,
+    message,
+  })
+  await usermessage.save();
+  return res.json({message:"message send successfully"});
+  
+}
+module.exports=[registeruser,getuser,userinfo,getmessage];
