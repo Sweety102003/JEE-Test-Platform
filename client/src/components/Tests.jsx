@@ -33,7 +33,7 @@ No tests available .Please check after some time.
 </p>):(
   <div className='Testlist' >
   {tests.map((test)=>(
-    <div key={test._id} className='card'>
+    <div key={test._id} className='card' style={{backgroundColor:"white"}}>
 
   <h2 style={{color:" #333" , fontSize:"2rem"}}>
     {test.testname}

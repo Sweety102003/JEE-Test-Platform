@@ -15,6 +15,7 @@ function Login() {
     console.log(response.data);
 
     localStorage.setItem("token" ,response.data);
+    window.dispatchEvent(new Event("storage"));
     navigate("/");
   }
 
