@@ -77,7 +77,7 @@ function Performance() {
         {insights.strengths.length > 0 ? (
           <ul>
             {insights.strengths.map((subject) => (
-              <li key={subject}>{subject}</li>
+              <li key={subject}>{subject} ,</li>
             ))}
           </ul>
         ) : (
@@ -89,7 +89,7 @@ function Performance() {
           
             <p>Need improvement in &nbsp;
             {insights.weaknesses.map((subject) => (
-              <p style={{display:"inline-block"}} key={subject}> {subject}</p>
+              <p style={{display:"inline-block"}} key={subject}> {subject} ,</p>
             ))}</p>
           
         ) : (

@@ -10,7 +10,7 @@ function Tests() {
    const getdata=async(req,res)=>{
    try {
     const response =await axios.get("http://localhost:5000/tests");
-    console.log(response);
+  
     setTests(response.data);
     
     }

@@ -1,12 +1,16 @@
 const express =require("express");
 const [ createtest ,getalltests,gettestbyid ,attemptedtest ,createbookmark ,getbookmarkedques ,getupcomingtests ] = require("../controllers/testcontroller");
-const [calculateresult,getresult] = require("../controllers/resultcalculation");
+const [calculateresult,getresult ] = require("../controllers/resultcalculation");
+const [getadmintests,howmanyattempted, getleaderboard]=require("../controllers/admin");
 const requirelogin = require("../middleware/requirelogin");
 const router=express.Router();
-router.post("/create"  ,createtest);
+router.post("/create"  ,requirelogin,createtest);
 router.get("/tests" , getalltests);
+router.get("/admintests",requirelogin ,getadmintests);
+router.post("/calculatingtestusers",howmanyattempted);
 router.get("/test/:id" ,gettestbyid);
 router.post("/submittest" ,calculateresult);
+router.get("/leaderboard" ,getleaderboard);
 router.get("/results/:id" ,requirelogin,getresult);
 router.get("/attemptedtests",requirelogin ,attemptedtest);
 router.post("/bookmark" ,requirelogin ,createbookmark);

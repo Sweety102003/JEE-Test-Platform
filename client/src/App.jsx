@@ -16,6 +16,9 @@ import Logout from './components/Logout';
 import { useState } from 'react';
 import ContactUs from './components/ContactUs';
 import Testcalender from './components/Testcalender';
+import { ToastContainer} from 'react-toastify';
+import Admindashboard from './components/Admindashboard';
+
 
 
 function App() {
@@ -24,6 +27,7 @@ function App() {
   
   return (
     <div>
+      <ToastContainer theme='dark' />
     
 <Navbar setmodalOpen={setmodalOpen} />
     
@@ -40,10 +44,10 @@ function App() {
       <Route path="/createtests" element={<AddTest />}/>
       <Route path="/contact" element={<ContactUs />} />
       <Route path="/upcomingtests" element={<Testcalender />}/>
+      <Route path="/admindashboard" element={<Admindashboard />} />
       </Routes>
       
       {modalOpen && <Logout setmodalOpen={setmodalOpen}/>}
-  
     </div>
   )
 }

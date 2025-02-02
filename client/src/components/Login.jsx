@@ -2,21 +2,33 @@ import React, { useState } from 'react'
 import("./css files/login.css")
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 function Login() {
-  const [email , setEmail]=useState();
-  const [password ,setPassword]=useState();
+  const [email , setEmail]=useState("");
+  const [password ,setPassword]=useState("");
+  const notifyA=(message)=> toast.error(message);
+  const notifyb=(message)=> toast.success(message);
   const navigate=useNavigate();
 
-  const postdata=async(req,res)=>{
+  const postdata=async()=>{
+    try{
     const response=await axios.post("http://localhost:5000/login",{
       email:email,
       password:password
     });
-    console.log(response.data);
+    localStorage.setItem("token" ,response.data.token);
+notifyb(response.data.message);
 
-    localStorage.setItem("token" ,response.data);
     window.dispatchEvent(new Event("storage"));
     navigate("/");
+  }
+  catch(error){
+  
+    notifyA(error.response?.data?.message || "Login failed!");
+  }
+
+
+    
   }
 
   return (
@@ -42,10 +54,10 @@ function Login() {
     <button className='btn2' onClick={postdata}> Login </button>
     <hr style={{color:"grey"}} />
     <div className='form2' style={{marginTop:"12px",borderTop:"1px solid grey"}}>
-      <span style={{display:"inline-block" ,fontSize:"1rem" ,textAlign:"left"}} >
+      <p style={{display:"inline-block" ,fontSize:"1rem" ,textAlign:"left"}} >
         If you dont have a account, please register first :
-    <p style={{display:"inline-block" ,color:"blue",fontSize:"1rem" , cursor:"pointer"}} onClick={()=>{navigate("/register")}}> Register now </p>
-      </span>
+    <span style={{display:"inline-block" ,color:"blue",fontSize:"1rem" , cursor:"pointer" ,textAlign:"center"}} onClick={()=>{navigate("/register")}}> Register now </span>
+      </p>
     </div>
 
     </div>

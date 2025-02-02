@@ -4,7 +4,7 @@ const Test = require("../models/tests");
 
 const createtest =async(req ,res)=>{
 const  { subjects,duration ,testname } =req.body;
-console.log(req.body);
+
 const newTest = new Test({
     subjects,
     duration,

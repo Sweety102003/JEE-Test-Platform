@@ -65,10 +65,10 @@ if(!email || !password)
 bcrypt.compare(password,user.password).then((match)=>{
 if(match){
     const token=jwt.sign({_id:user.id},JWT_SECRET);
-    return res.status(200).json(token );
+    return res.status(200).json({token,message:"signed in successfully" });
 }
     else{
-        return res.json({message:"invalid password"});
+        return res.status(404).json({message:"invalid password"});
 
     }
 

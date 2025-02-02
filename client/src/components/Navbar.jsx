@@ -37,8 +37,9 @@ const Navbar = ({ setmodalOpen }) => {
             <li onClick={()=>{setMenuOpen(false)}}><Link to="/tests">Tests</Link></li>
             <li onClick={()=>{setMenuOpen(false)}}><Link to="/profile">Profile</Link></li>
             <li onClick={()=>{setMenuOpen(false)}}><Link to="/performance">Performance</Link></li>
-            <li onClick={()=>{setMenuOpen(false)}}><Link to="/bookmark">Bookmarks</Link></li>
+            <li onClick={()=>{setMenuOpen(false)}}><Link to="/bookmark/:id">Bookmarks</Link></li>
             <li onClick={()=>{setMenuOpen(false)}}><Link to="/createtests">Add Test</Link></li>
+            <li onClick={()=>{setMenuOpen(false)}}><Link to="/admindashboard">Admin Dashboard</Link></li>
             <li onClick={()=>{setMenuOpen(false)}}><Link to="/contact">Contact Us</Link></li>
             <li onClick={()=>{setMenuOpen(false)}}><Link to="/upcomingtests">Upcoming Tests</Link></li>
             <li onClick={() =>{setmodalOpen(true);

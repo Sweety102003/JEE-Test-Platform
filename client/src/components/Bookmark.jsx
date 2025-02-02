@@ -22,13 +22,13 @@ setquestions(response.data.bookmarkedQuestions);
         questions.map((question ,index)=>(
        <div key={index}>
        Ques: &nbsp; {question.questionText}
-        <p>
-            {question.options.map((option,index)=>(
-                <><p><input type="radio"></input>
-                {option.optionText}</p>
-                </>
+        
+            {question.options.map((option,indexs)=>(
+                <p key={indexs} ><input  type="radio"></input>
+                {option.optionText}
+                </p>
             ))}
-        </p>
+        
         <p>Ans : Option no. {question.correctAnswer+1}</p>
 
         </div>
