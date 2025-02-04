@@ -5,6 +5,7 @@ import "./css files/addtest.css";
 function AddTest() {
   const [testname, setTestname] = useState("");
   const [duration, setDuration] = useState("");
+  const [date ,setDate]=useState("");
   const [subjects, setSubjects] = useState([
     { subjectname: "", questions: [{ questionText: "", correctAnswer: "", options: [{ optionText: "" }] }] },
   ]);
@@ -57,6 +58,7 @@ const token=localStorage.getItem('token');
       const response = await axios.post("http://localhost:5000/create", {
         testname,
         duration,
+        date,
         subjects,
       },{
         headers:{
@@ -88,6 +90,14 @@ const token=localStorage.getItem('token');
         onChange={(e) => setDuration(e.target.value)}
         placeholder="Enter duration"
       />
+       <label>Date:</label>
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+        placeholder="Enter date"
+      />
+
 
       <h3>Subjects:</h3>
       {subjects.map((subject, subjectIndex) => (
