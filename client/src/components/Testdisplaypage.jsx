@@ -258,6 +258,7 @@ function Testdisplaypage() {
           <>
             <p style={{ fontSize: "2rem" }}>
               Ques: {questions[currentQuestionIndex]?.questionText}
+            <p><img src={questions[currentQuestionIndex]?.questionImage} /></p> 
             </p>
 
             {questions[currentQuestionIndex]?.options.map((option, oIndex) => (
@@ -271,6 +272,7 @@ function Testdisplaypage() {
                   onChange={() => handleAnswerSelection(currentQuestionIndex, oIndex)}
                 />
                 {option.optionText}
+               <p> <img src={option?.optionImage}/></p> 
               </div>
             ))}
 
