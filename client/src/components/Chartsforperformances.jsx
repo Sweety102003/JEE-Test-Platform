@@ -80,7 +80,8 @@ function Chartsforperformances({ subjectScores }) {
   return (
     <div className="chart-section">
       <h2 style={{ fontSize: "1.5rem" }}>Subject Scores Across Tests</h2>
-      <Bar data={chartData} options={chartOptions} />
+      <div className="bar-chart-wrapper">
+      <Bar data={chartData} options={chartOptions} /></div>
     </div>
   );
 }

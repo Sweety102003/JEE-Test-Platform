@@ -68,10 +68,12 @@ function Performance() {
 
 
      {test.length>0?(<>
+     <div className="chart-wrapper">
       <Chartsforperformances2 testScores={testScores} />
-
+      </div>
+<div className="chart-wrapper" >
     
-<Chartsforperformances subjectScores={subjectScores} />
+<Chartsforperformances subjectScores={subjectScores} /></div>
 <div style={{ marginTop: "30px", width: "80%" }}>
         <h2>Strengths</h2>
         {insights.strengths.length > 0 ? (

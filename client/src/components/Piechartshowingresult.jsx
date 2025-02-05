@@ -50,7 +50,8 @@ function Piechartshowingresult({ subjectScores }) {
     
  <div className="chart-container">
       <h2>Score Distribution Across Subjects</h2>
-      <Pie data={chartData} options={chartOptions} />
+      <div className='pie-chart-wrapper'>
+      <Pie data={chartData} options={chartOptions} /></div>
     </div>
     
   )

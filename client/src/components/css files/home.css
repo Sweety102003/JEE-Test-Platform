@@ -8,6 +8,7 @@
     flex-wrap: wrap; /* Wrap items to a new row if the screen is too small */
   }
   
+  
   .items div {
     display: flex;
     flex-direction: row; /* Align image and text in a row */
@@ -28,7 +29,9 @@
     object-fit: cover; /* Ensures the image fills the space without distortion */
     border-radius: 10px; /* Optional rounded corners */
   }
-  
+  .contacto{
+    display:none;
+  }
   .items div h2 {
     font-size: 18px;
     margin: 0;
@@ -36,6 +39,7 @@
     text-align: left; /* Align text to the left */
     flex: 1; /* Take up remaining space in the row */
   }
+  
   @media (max-width: 768px) {
     .items div {
       flex-direction: column; /* Stack image and text vertically */
@@ -150,5 +154,13 @@
       top:50%;
       left:50%;
     }
+   
+  }
+  @media(max-width: 500px)
+  {
+    .contacto{
+      display:block;
+    }
+
   }
   

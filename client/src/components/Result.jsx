@@ -42,10 +42,10 @@ function Result() {
           {subjectScores && (
             <>
               <div className="charts-container">
-                <div className="chart-section">
+                <div className="chart-wrapper">
                   <Chartsforresult subjectScores={subjectScores} />
                 </div>
-                <div className="chart-section">
+                <div className="chart-wrapper">
                   <Piechartshowingresult subjectScores={subjectScores} />
                 </div>
               </div>

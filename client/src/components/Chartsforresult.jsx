@@ -63,8 +63,9 @@ function Chartsforresult({ subjectScores }) {
   return (
     <div className="chart-container">
       <h2>Subject Scores</h2>
+      <div className="bar-chart-wrapper" >
       <Bar data={chartData} options={chartOptions} />
-    </div>
+    </div></div>
   );
 }
 

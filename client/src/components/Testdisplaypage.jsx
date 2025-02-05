@@ -245,24 +245,24 @@ function Testdisplaypage() {
       </div>
 
       <div className="question-section">
-        <div className="submit-container">
+        <div className="submit-container show">
           <button className="btn" onClick={handleSubmit}>
             Submit
           </button>
         </div>
-        <h1 style={{ display: "inline-block" }}>{testname}</h1>
+        <h1 style={{ display: "inline-block"  , marginTop:"4px"}}>{testname}</h1>
 
         <div className="timer">Time Remaining: {formatTime(timer)}</div>
 
         {questions.length > 0 && (
           <>
-            <p style={{ fontSize: "2rem" }}>
+            <p style={{ fontSize: "1.8rem" ,marginBottom:"2px" ,padding:"0px" }}>
               Ques: {questions[currentQuestionIndex]?.questionText}
             <p><img src={questions[currentQuestionIndex]?.questionImage} /></p> 
             </p>
 
             {questions[currentQuestionIndex]?.options.map((option, oIndex) => (
-              <div key={oIndex} style={{ fontSize: "2rem" }}>
+              <div key={oIndex} style={{ fontSize: "1.5rem" ,marginBottom:" 0px" ,marginTop:"0px" ,padding:"0px"}} >
                 <input
                   type="radio"
                   name={`option-${currentQuestionIndex}`}
@@ -306,7 +306,13 @@ function Testdisplaypage() {
                 >
                   Next Question
                 </button>
+               
               </div>
+            
+          <button className="btn7 hide" onClick={handleSubmit}>
+            Submit
+          </button>
+          
             </div>
           </>
         )}

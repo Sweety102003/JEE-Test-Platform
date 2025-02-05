@@ -45,7 +45,7 @@ No tests available .Please check after some time.
   <div className="info" style={{fontWeight:"bold" ,fontSize:"24 px" ,padding:"0px"}}>
     <p> Questions: {(test.subjects[0]?.questions?.length ?? 0) +
 (test.subjects[1]?.questions?.length ?? 0) +
-(test.subjects[2]?.questions?.length ?? 0) ?? 90}  </p><p> Duration: {test.duration} min</p></div></div>
+(test.subjects[2]?.questions?.length ?? 0) || 90 }  </p><p> Duration: {test.duration} min</p></div></div>
     <button className="btn" style={{ width:"80%" ,backgroundColor:"#2c3e50" ,marginBottom:"8px" ,position:"relative" , bottom:"0px" ,fontSize:"2rem" ,fontWeight:"bold"}} 
     onClick={()=>{
       navigate(`/test/${test._id}`);

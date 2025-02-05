@@ -9,10 +9,11 @@ import "./css files/home.css"
 import { useNavigate } from 'react-router-dom'
 import Footer from './Footer'
 import Tests from './Tests'
+import ContactUs from './ContactUs'
 function Home() {
   const navigate=useNavigate();
   return (
-    <div className='main' style={{backgroundColor:"#cdd3d8"}}>
+    <div className='main' style={{backgroundColor:"#cdd3d8" }}>
     <div className="component">
       <div>
       <h1 style={{fontSize:"4rem" ,color:"#2c3e50" ,marginTop:"50px",marginBottom:"30px"}}> Edge for IIT </h1>
@@ -23,7 +24,7 @@ function Home() {
     }}>Enroll now</button>
     </div>
     <div >
-      <img id="imge" src={photo1} />
+      <img  id="imge" src={photo1} />
     </div></div>
     <div> 
       <h2 style={{textAlign:"center", fontSize:"3rem", marginTop:"0px" ,color:"#2c3e50"}}> Only the best for you </h2>
@@ -54,10 +55,14 @@ function Home() {
 
     </div>
     <Tests />
+    <div className='contacto'>
+      <ContactUs />
+
+    </div>
    
-    <p style={{backgroundColor:"#cdd3d8" ,fontSize:"2rem" ,textAlign:'center',color:"#2c3e50" }}>© 2025 JEE Test Platform. All rights reserved.</p>
+    <p style={{fontSize:"2rem" ,textAlign:'center',color:"#2c3e50" }}>© 2025 JEE Test Platform. All rights reserved.</p>
        
-    
+    <p style={{fontSize:"1rem" ,color:"#2c3e50" }}> For any queries , contact @myjeeplatform.com </p>
     </div>
   )
 }

@@ -33,7 +33,7 @@
   
   .chart-wrapper {
     width: 100%;
-    max-width: 750px; /* Increased max-width */
+    max-width: 650px; /* Increased max-width */
     margin-bottom: 2rem;
     background-color: #f8f8f8;
     border-radius: 12px; /* Increased border radius */
@@ -42,38 +42,55 @@
   }
   
   .bar-chart-wrapper {
-    min-height: 500px; /* Set minimum height for bar chart */
+    min-height: 360px; /* Set minimum height for bar chart */
   }
   
   .pie-chart-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 500px; /* Set minimum height for pie chart */
+    min-height: 400px; /* Set minimum height for pie chart */
   }
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
   
   @media (min-width: 1400px) {
     .chart-wrapper {
       width: 48%;
     }
+    .bar-chart-wrapper {
+      min-height: 260 px;
+  }
   }
   
   @media (max-width: 1399px) {
     .chart-wrapper {
       width: 100%;
     }
+    .bar-chart-wrapper {
+      min-height: 260px;
+  }
   }
   
   @media (max-width: 768px) {
     .chart-wrapper {
       padding: 1rem;
     }
+    .bar-chart-wrapper {
+      min-height: 185px;
+  }
   }
   
   @media (max-width: 480px) {
     .chart-wrapper {
       padding: 0.75rem;
     }
+    .bar-chart-wrapper {
+      min-height: 190px;
+  }
   }
   
   /* Adjust font weights for better readability */
