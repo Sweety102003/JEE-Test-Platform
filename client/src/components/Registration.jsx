@@ -10,7 +10,7 @@ function Registration() {
   const [password , setPassword]=useState();
   const [isAdmin ,setisadmin]=useState(false);
   const postdata=async(req,res)=>{
-const response=await axios.post("http://localhost:5000/register",{
+const response=await axios.post(`${import.meta.env.VITE_API_URL}/register`,{
 name:name,
 email:email,
 password:password,

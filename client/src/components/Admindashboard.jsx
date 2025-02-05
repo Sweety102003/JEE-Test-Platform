@@ -7,7 +7,7 @@ function Admindashboard() {
     const [attempts ,setAttempts]=useState([]);
     const [user,setuser]=useState([])
     const getdata=async()=>{
-        const response=await axios.get("http://localhost:5000/admintests",{
+        const response=await axios.get(`${import.meta.env.VITE_API_URL}/admintests`,{
             headers:{
                 Authorization:`Bearer ${token}`,
             }
@@ -20,14 +20,14 @@ function Admindashboard() {
     const getusersintest=async(testid)=>{
         if(tests.length===0) return ;
 
-const response=await axios.post("http://localhost:5000/calculatingtestusers",{
+const response=await axios.post(`${import.meta.env.VITE_API_URL}/calculatingtestusers`,{
     id:testid,
 });
 
 setAttempts(response.data);
     }
    const getleaderboard= async()=>{
-    const response=await axios.get("http://localhost:5000/leaderboard");
+    const response=await axios.get(`${import.meta.env.VITE_API_URL}/leaderboard`);
     setuser(response.data);
    }
 

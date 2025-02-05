@@ -229,7 +229,7 @@ button:disabled {
 @media (max-width: 910px ){
   
 
- .sidebar{
+ .hide2{
   display:none;
  }
   .show{
@@ -238,6 +238,36 @@ button:disabled {
   .hide{
     display:block;
     
+  }
+  .sidebar {
+    height: 160px;
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    position: relative;
+    right:0px;
+    display: flex;
+    flex-direction: column;
+    background-color: #34495e;
+    color: rgb(145, 140, 140);
+    overflow-y: auto;
+  }
+  button {
+    padding: 6px 14px;
+    font-size: 1 rem;
+    margin: 4px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .contained {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
   }
   .question-section {
     display: flex;

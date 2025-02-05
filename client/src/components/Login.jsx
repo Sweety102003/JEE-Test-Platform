@@ -12,7 +12,7 @@ function Login() {
 
   const postdata=async()=>{
     try{
-    const response=await axios.post("http://localhost:5000/login",{
+    const response=await axios.post(`${import.meta.env.VITE_API_URL}/login`,{
       email:email,
       password:password
     });

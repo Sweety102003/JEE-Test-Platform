@@ -5,7 +5,7 @@ function Bookmark() {
     const token=localStorage.getItem("token");
     
     const getdata=async()=>{
-const response=await axios.get(`http://localhost:5000/bookmarks`,{
+const response=await axios.get(`${import.meta.env.VITE_API_URL}/bookmarks`,{
     headers:{
         Authorization : `Bearer ${token}`,
     }

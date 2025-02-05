@@ -9,7 +9,7 @@ function ContactUs() {
   const [message ,setmessage]=useState();
 const handlesubmit=async()=>{
   const token =localStorage.getItem('token');
-  const response=await axios.post("http://localhost:5000/contact",{
+  const response=await axios.post(`${import.meta.env.VITE_API_URL}/contact`,{
     name:name,
     email:email ,
     subject:subject ,

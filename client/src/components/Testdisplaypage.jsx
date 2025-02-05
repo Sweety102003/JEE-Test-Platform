@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./css files/display.css";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
+import { FiAlignJustify } from "react-icons/fi";
 
 function Testdisplaypage() {
   const { id } = useParams();
@@ -20,6 +21,8 @@ function Testdisplaypage() {
   const [timerRunning, setTimerRunning] = useState(false);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [timeSpentOnQuestions, setTimeSpentOnQuestions] = useState([]);
+  const [showside ,setshowside]=useState(false);
+
 
   useEffect(() => {
     getdata();
@@ -27,7 +30,7 @@ function Testdisplaypage() {
 
   const getdata = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/test/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/test/${id}`);
       setTest(response.data);
       setSubjects(response.data.subjects);
       setTestname(response.data.testname);
@@ -138,7 +141,7 @@ function Testdisplaypage() {
   const postbookmark =async()=>{
    
     const questionId = questions[currentQuestionIndex]._id;
-    const response= await axios.post("http://localhost:5000/bookmark",{
+    const response= await axios.post(`${import.meta.env.VITE_API_URL}/bookmark`,{
    questionId:questionId,
       bookmarked:true},
 
@@ -185,7 +188,7 @@ function Testdisplaypage() {
 
       console.log(payload);
 
-      const response = await axios.post("http://localhost:5000/submittest", payload);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/submittest`, payload);
       console.log("Submission Response:", response.data);
       const subjectScores = response.data.subjectScores;
 
@@ -204,7 +207,47 @@ function Testdisplaypage() {
 
   return (
     <div className="contained">
-      <div className="sidebar">
+      <div className="hide2">
+        <div className="sidebar">
+        {subjects.map((subject, index) => (
+          <div className="subject-container" key={index}>
+            <div className="subject-header" >
+              <button
+                className={`subject-button ${index === currentSubjectIndex ? "active" : ""}`}
+                onClick={() => handleSubjectChange(index)} style={{backgroundColor:"#2c3e50"}}
+              >
+                {subject.subjectname}
+              </button>
+              <IoIosArrowDropdownCircle
+                className="dropdown-icon" style={{color:"black"}}
+                onClick={() => toggleDropdown(index)}
+              />
+            </div>
+            {showDropdown[index] && (
+              <div className="question-dropdown">
+                {subjects[index].questions.map((_, qIndex) => (
+                  <div
+                    key={qIndex}
+                    className={`question-item ${
+                      questionStatus[index][qIndex] || "not-attempted"
+                    }`}
+                    onClick={() => {
+                      updateTimeSpent();
+                      setCurrentQuestionIndex(qIndex);
+                      if (index !== currentSubjectIndex) {
+                        handleSubjectChange(index);
+                      }
+                    }}
+                  >
+                    <p style={{ margin: 0, fontWeight: "bold" }}>Q{qIndex + 1}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+     </div> </div>
+{showside&& <><div className="sidebar">
         {subjects.map((subject, index) => (
           <div className="subject-container" key={index}>
             <div className="subject-header" >
@@ -243,7 +286,7 @@ function Testdisplaypage() {
           </div>
         ))}
       </div>
-
+</>}
       <div className="question-section">
         <div className="submit-container show">
           <button className="btn" onClick={handleSubmit}>
@@ -252,7 +295,10 @@ function Testdisplaypage() {
         </div>
         <h1 style={{ display: "inline-block"  , marginTop:"4px"}}>{testname}</h1>
 
-        <div className="timer">Time Remaining: {formatTime(timer)}</div>
+        <div className="timer" > Time Remaining: {formatTime(timer)}
+          <span className="hide" style={{display:"inline-block" ,color:"black",marginLeft:"8px" ,position:"fixed" ,right:"5px" }} onClick={()=>{setshowside(!showside);}}><FiAlignJustify /></span>
+
+        </div>
 
         {questions.length > 0 && (
           <>

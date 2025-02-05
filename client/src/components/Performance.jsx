@@ -9,7 +9,7 @@ function Performance() {
 
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/attemptedtests", {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/attemptedtests`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

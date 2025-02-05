@@ -8,7 +8,7 @@ function Profile() {
 
 
     const getdata=async()=>{
-        const response=await axios.get("http://localhost:5000/profile",{
+        const response=await axios.get(`${import.meta.env.VITE_API_URL}/profile`,{
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -16,7 +16,7 @@ function Profile() {
         setuser(response.data);
     }
     const getgiventests=async()=>{
-        const response=await axios.get("http://localhost:5000/attemptedtests",{
+        const response=await axios.get(`${import.meta.env.VITE_API_URL}/attemptedtests`,{
             headers:{ Authorization: `Bearer ${token}`,},
         });
         console.log(response);

@@ -7,7 +7,7 @@ function Testcalender() {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const getdata=async()=>{
-        const response=await axios.get("http://localhost:5000/upcomingtests");
+        const response=await axios.get(`${import.meta.env.VITE_API_URL}/upcomingtests`);
         console.log("mera",response);
         settests(response.data);
     }

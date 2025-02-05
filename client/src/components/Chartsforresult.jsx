@@ -11,7 +11,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-// Register Chart.js modules
+
 ChartJS.register(
   CategoryScale,
   LinearScale,

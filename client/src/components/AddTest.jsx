@@ -87,7 +87,8 @@ function AddTest() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/create",
+        `${import.meta.env.VITE_API_URL}/create`,
+        
         { testname, duration, date, subjects },
         { headers: { Authorization: `Bearer ${token}` } }
       );

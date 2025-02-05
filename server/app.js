@@ -1,10 +1,12 @@
 const express=require("express");
 const app=express();
-
+require("dotenv").config();
 const cors =require("cors");
 const mongoose =require("mongoose");
-require("dotenv").config();
+
+
 const Mongo_url=process.env.Mongo_url;
+
 const PORT=process.env.PORT ;
 const userroutes=require("./Routes/Userroutes");
 const testroutes=require("./Routes/Testroutes");

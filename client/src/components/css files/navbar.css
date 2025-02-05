@@ -35,6 +35,7 @@
     background: rgba(0, 0, 0, 0.9);
     padding: 10px;
     border-radius: 10px;
+    z-index: 27;
   }
 
   .navbar-links.active {
