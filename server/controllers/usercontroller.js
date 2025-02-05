@@ -2,8 +2,10 @@ const USER = require("../models/user");
 const nodemailer=require("nodemailer");
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcrypt");
+const myemail=process.env.myemail;
+const mypass=process.env.mypass;
 
-const JWT_SECRET=require("../keys2");
+const JWT_SECRET=process.env.JWT_SECRET;
 const requirelogin = require("../middleware/requirelogin");
 const Message = require("../models/message");
 
@@ -35,12 +37,12 @@ const transporter=nodemailer.createTransport({
 service:
 "gmail",
 auth:{
-    user:"kavyahooda83@gmail.com",
-    pass:"wtzj yozt utnu atgu"
+    user:myemail,
+    pass:mypass
 }
 });
 const mailOptions = {
-    from: 'kavyahooda83@gmail.com',       
+    from: myemail,       
     to: userEmail,                      
     subject: 'Welcome to our platform!', 
     text: 'Thank you for registering. Please click the link to verify your email.'  

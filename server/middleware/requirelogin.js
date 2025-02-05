@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = require("../keys2");
+const JWT_SECRET = process.env.JWT_SECRET;
 const USER = require("../models/user");
 
 module.exports = (req, res, next) => {
