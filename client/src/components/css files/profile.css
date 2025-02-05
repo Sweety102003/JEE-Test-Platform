@@ -117,9 +117,7 @@ body {
   margin-top: 1.5rem;
 }
 
-/* Media Queries for Responsive Design */
 
-/* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .profile-component {
     padding: 1.5rem;
@@ -142,7 +140,7 @@ body {
   }
 }
 
-/* Medium devices (tablets, 768px and up) */
+
 @media (min-width: 768px) {
   .profile-component {
     padding: 2rem;
@@ -190,7 +188,7 @@ body {
   }
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
+
 @media (min-width: 1200px) {
   .profile-component {
     padding: 3rem;

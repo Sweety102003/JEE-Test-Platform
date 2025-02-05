@@ -33,7 +33,7 @@ function Performance() {
   const calculateInsights = (subjectScores) => {
     const strengths = [];
     const weaknesses = [];
-    const threshold = { strong: 150, weak: 45 };
+    const threshold = { strong: 100, weak: 15 };
 
     subjectScores.forEach((score) => {
       if (score.score >= threshold.strong) strengths.push(score.subjectName);
@@ -95,7 +95,7 @@ function Performance() {
             ))}</p>
           
         ) : (
-          <p>No weaknesses identified</p>
+          <p>No weaknesses identified </p>
         )}
       </div>
      </>

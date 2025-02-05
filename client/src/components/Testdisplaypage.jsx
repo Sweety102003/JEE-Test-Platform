@@ -247,7 +247,7 @@ function Testdisplaypage() {
           </div>
         ))}
      </div> </div>
-{showside&& <><div className="sidebar">
+{showside&& <div className="sidebar" style={{width:"95vw"}}>
         {subjects.map((subject, index) => (
           <div className="subject-container" key={index}>
             <div className="subject-header" >
@@ -286,7 +286,7 @@ function Testdisplaypage() {
           </div>
         ))}
       </div>
-</>}
+}
       <div className="question-section">
         <div className="submit-container show">
           <button className="btn" onClick={handleSubmit}>
@@ -296,7 +296,7 @@ function Testdisplaypage() {
         <h1 style={{ display: "inline-block"  , marginTop:"4px"}}>{testname}</h1>
 
         <div className="timer" > Time Remaining: {formatTime(timer)}
-          <span className="hide" style={{display:"inline-block" ,color:"black",marginLeft:"8px" ,position:"fixed" ,right:"5px" }} onClick={()=>{setshowside(!showside);}}><FiAlignJustify /></span>
+          <span className="hide" style={{ color:"black",marginLeft:"8px" ,position:"relative" ,right:" 0px" }} onClick={()=>{setshowside(!showside);}}><FiAlignJustify /></span>
 
         </div>
 
@@ -323,7 +323,7 @@ function Testdisplaypage() {
             ))}
 
             <div className="navigation-section">
-              <div style={{display:"flex" ,justifyContent:"space-between"}}><button
+              <div  style={{display:"flex" ,justifyContent:"space-around"}}><button
                 className="mark-for-review-btn"
                 onClick={() => handleMarkForReview(currentQuestionIndex)}
               >

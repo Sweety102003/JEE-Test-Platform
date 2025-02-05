@@ -1,4 +1,4 @@
-/* General calendar container */
+
 .react-calendar {
     max-width: 500px;
     margin: 30px auto;
@@ -9,7 +9,7 @@
     font-family: 'Roboto', sans-serif;
   }
   
-  /* Calendar header navigation (month/year) */
+  
   .react-calendar__navigation {
     display: flex;
     justify-content: space-between;

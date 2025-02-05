@@ -1,55 +1,32 @@
-/* .charts-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 15px auto;
-    flex-direction: row;
-  }
-  
-  .chart-section {
-    width: 45%; 
-    margin: 10px 0;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-   */
-   .charts-container {
+ .charts-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    max-width: 1600px; /* Increased max-width */
+    max-width: 1600px; 
     margin: 0 auto;
     padding: 1rem;
   }
   
   .chart-wrapper {
     width: 100%;
-    max-width: 650px; /* Increased max-width */
+    max-width: 650px; 
     margin-bottom: 2rem;
     background-color: #f8f8f8;
-    border-radius: 12px; /* Increased border radius */
-    padding: 1.5rem; /* Increased padding */
+    border-radius: 12px;
+    padding: 1.5rem; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   .bar-chart-wrapper {
-    min-height: 360px; /* Set minimum height for bar chart */
+    min-height: 360px; 
   }
   
   .pie-chart-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 400px; /* Set minimum height for pie chart */
+    min-height: 400px; 
   }
   canvas {
     width: 100% !important;
@@ -93,7 +70,7 @@
   }
   }
   
-  /* Adjust font weights for better readability */
+  
   .charts-container canvas {
     font-weight: 500 !important;
   }
