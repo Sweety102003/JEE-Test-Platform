@@ -188,7 +188,9 @@ function Testdisplaypage() {
 
       console.log(payload);
 
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/submittest`, payload);
+      console.log("i am ");
+      console.log(import.meta.env.VITE_API_URL);
+      const response = await axios.post(`http://localhost:5000/submittest2`, payload);
       console.log("Submission Response:", response.data);
       const subjectScores = response.data.subjectScores;
 
@@ -355,7 +357,7 @@ function Testdisplaypage() {
                
               </div>
             
-          <button className="btn7 hide" onClick={handleSubmit}>
+          <button className="btn7 hide" onClick={()=>{handleSubmit()}}>
             Submit
           </button>
           

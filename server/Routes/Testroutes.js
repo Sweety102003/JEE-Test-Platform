@@ -9,7 +9,7 @@ router.get("/tests" , getalltests);
 router.get("/admintests",requirelogin ,getadmintests);
 router.post("/calculatingtestusers",howmanyattempted);
 router.get("/test/:id" ,gettestbyid);
-router.post("/submittest" ,calculateresult);
+router.post("/submittest2" ,calculateresult);
 router.get("/leaderboard" ,getleaderboard);
 router.get("/results/:id" ,requirelogin,getresult);
 router.get("/attemptedtests",requirelogin ,attemptedtest);
