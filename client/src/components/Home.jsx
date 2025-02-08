@@ -16,18 +16,18 @@ function Home() {
     <div className='main' style={{backgroundColor:"#cdd3d8" }}>
     <div className="component">
       <div>
-      <h1 style={{fontSize:"4rem" ,color:"#2c3e50" ,marginTop:"50px",marginBottom:"30px"}}> Edge for IIT </h1>
-    <h2 style={{textAlign:"left", fontSize:"3rem", marginTop:"0px" ,color:"#2c3e50"}}>Exclusively for Students</h2>
-    <p style={{fontSize:"23px"}}> Turn your dreams into reality- prepare ,practice and succeed with confidence!</p>
-    <button style={{position:"relative" , left:"0px" ,backgroundColor:"#2c3e50" ,color:"white" ,padding:"5px" ,fontSize:"2rem" ,borderRadius:"10px"}} className='btn5'onClick={()=>{
+      <h1 > Edge for IIT </h1>
+    <h2 >Exclusively for Students</h2>
+    <p > Turn your dreams into reality- prepare ,practice and succeed with confidence!</p>
+    <button  className='btn5'onClick={()=>{
       navigate("/register")
     }}>Enroll now</button>
     </div>
     <div >
       <img  id="imge" src={photo1} />
     </div></div>
-    <div> 
-      <h2 style={{textAlign:"center", fontSize:"3rem", marginTop:"0px" ,color:"#2c3e50"}}> Only the best for you </h2>
+    <div className="vite"> 
+      <h2 > Only the best for you </h2>
       <p style={{textAlign:"center"}}>With access to real exam level mock tests crafted by best faculities and personalized score improvement reports,
         your best score is just a click away!
 

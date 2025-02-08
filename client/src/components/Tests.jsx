@@ -36,7 +36,7 @@ No tests available .Please check after some time.
   {tests.map((test)=>(
     <div key={test._id} className='card' style={{backgroundColor:"white"}}>
 
-  <h2 style={{color:" #333" , fontSize:"2rem"}}>
+  <h2 style={{color:" #333" }}>
     {test.testname}
   </h2>
   <div className='card2'>

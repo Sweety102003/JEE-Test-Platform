@@ -64,6 +64,9 @@ h2 {
   height: auto;
   border-radius: 5px;
 }
+.Testlist h2{
+font-size: 2rem;
+}
 
 .info {
   text-align: left;
@@ -107,20 +110,25 @@ h2 {
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.5rem;
+  .contain h1 {
+    font-size: 2rem;
   }
 
+  .Testlist h2{
+    font-size: 1.3rem;
+    }
   p {
     font-size: 1rem;
   }
-
+.info p{
+  font-size: 0.8rem;
+}
   .info {
     font-size: 0.8rem;
   }
 
   .btn {
-    font-size: 1rem;
-    padding: 6px;
+    font-size: 0.7rem;
+    padding: 1px;
   }
 }
