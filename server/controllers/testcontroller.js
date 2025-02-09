@@ -38,13 +38,14 @@ console.log(attempt);
 return res.json(attempt);
 };
 const createbookmark=async(req,res)=>{
-const {questionId,bookmarked}=req.body;
+const {questionId,status ,bookmarked}=req.body;
 const bookmark=new Bookmark({
     user:req.user._id,
     questionId,
+    status,
     bookmarked
 })
-console.log(bookmark);
+// console.log(bookmark);
 await bookmark.save();
 res.status(200).json(bookmark);
 };
@@ -55,6 +56,11 @@ const bookmarks=await Bookmark.find({user:req.user._id,
     bookmarked:true
 });
 const bookmarkedQuestionIds = bookmarks.map((bookmark) => bookmark.questionId);
+const bookmarkStatus = bookmarks.reduce((acc, bookmark) => {
+    acc[bookmark.questionId.toString()] = bookmark.status;
+    return acc;
+}, {});
+
 const tests=await Test.find();
 let bookmarkedQuestions = [];
 
@@ -68,6 +74,7 @@ let bookmarkedQuestions = [];
                             questionImage: question.questionImage,
                             options: question.options,
                             correctAnswer: question.correctAnswer,
+                            status: bookmarkStatus[question._id.toString()] || null, 
                         });
                     }
                 });

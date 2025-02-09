@@ -139,10 +139,12 @@ function Testdisplaypage() {
   };
   const token = localStorage.getItem("token");
   const postbookmark =async()=>{
-   
+   const status=questionStatus[currentSubjectIndex][currentQuestionIndex];
+   console.log(status);
     const questionId = questions[currentQuestionIndex]._id;
     const response= await axios.post(`${import.meta.env.VITE_API_URL}/bookmark`,{
    questionId:questionId,
+   status:status,
       bookmarked:true},
 
       {headers:{

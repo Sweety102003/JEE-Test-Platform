@@ -10,7 +10,6 @@ const response=await axios.get(`${import.meta.env.VITE_API_URL}/bookmarks`,{
         Authorization : `Bearer ${token}`,
     }
 });
-console.log(response.data);
 setquestions(response.data.bookmarkedQuestions);
     };
     useEffect(()=>{
@@ -31,6 +30,7 @@ setquestions(response.data.bookmarkedQuestions);
             ))}
         
         <p>Ans : Option no. {question.correctAnswer+1}</p>
+       {question?.status && <button style={{color:"white" ,fontSize:"1rem" ,padding:"5px" ,width:"125px"}}> {question?.status}</button>}
 
         </div>
         ))

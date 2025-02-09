@@ -10,6 +10,10 @@ questionId:{
     req:true
 
 },
+status:{
+type:String,
+req:true
+},
 bookmarked:{
     type:Boolean,
     default:false
