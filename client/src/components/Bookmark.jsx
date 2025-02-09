@@ -10,6 +10,7 @@ const response=await axios.get(`${import.meta.env.VITE_API_URL}/bookmarks`,{
         Authorization : `Bearer ${token}`,
     }
 });
+console.log(response.data);
 setquestions(response.data.bookmarkedQuestions);
     };
     useEffect(()=>{

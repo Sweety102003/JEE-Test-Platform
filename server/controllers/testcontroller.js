@@ -44,6 +44,7 @@ const bookmark=new Bookmark({
     questionId,
     bookmarked
 })
+console.log(bookmark);
 await bookmark.save();
 res.status(200).json(bookmark);
 };
@@ -72,7 +73,7 @@ let bookmarkedQuestions = [];
                 });
             });
         });
-
+console.log("me");
         res.status(200).json({ bookmarkedQuestions });
 };
 const getupcomingtests=async(req,res)=>{
