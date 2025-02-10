@@ -1,7 +1,7 @@
 # Project setup
 - Clone the repository
 ```shell
-git clone git@github.com:Sweety102003/JEE-Test-Platform.git
+git clone https://github.com/Sweety102003/JEE-Test-Platform.git 
 ```
 - Go to JEE-Test-Platform directory
 ```shell
@@ -23,7 +23,7 @@ npm install
 npm run dev
 ```
 
--Open a new terminal and go to server directory
+- Open a new terminal and go to server directory
   ```shell
   cd server
   ```
