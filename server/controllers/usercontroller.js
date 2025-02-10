@@ -26,7 +26,7 @@ password:hashedpassword,
 isAdmin
 })
   await user.save() ;
-  s                                        endConfirmationEmail(user.email);
+  sendConfirmationEmail(user.email);
   return  res.send({message:"User registered successfully "});
 
 
